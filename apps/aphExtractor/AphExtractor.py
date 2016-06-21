@@ -11,6 +11,9 @@ class AphExtractor:
     malQuery = "gen=1"
     femQuery = "gen=2"
 
+    def __init__(self):
+        return
+
     def get_lower_house_list(self):
         polly_list = []
 
