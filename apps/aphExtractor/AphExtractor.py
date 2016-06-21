@@ -1,7 +1,8 @@
+import requests
 from lxml import html
-import requests, time, datetime
 
-import Polly
+from Polly import Polly
+
 
 class AphExtractor:
 
@@ -35,11 +36,11 @@ class AphExtractor:
 
         return polly_list
 
-    def _extract_pollies(self,url, polly_list, house):
+    def _extract_pollies(self, url, polly_list, house):
         page = requests.get(url)
         tree = html.fromstring(page.content)
 
-        pollies = tree.xpath('//ul[@class="search-filter-results search-filter-results-thumbnails"]/text()')
+        pollies = tree.xpath('//ul[@class="search-filter-results search-filter-results-thumbnails"]')
 
         for iterPol in pollies[0].iterchildren():
             url   = iterPol[0][0].values()[0]
@@ -55,4 +56,4 @@ class AphExtractor:
 
             polly_list.append(Polly(name, id, party, seat, title, url, house))
 
-        return polly_list
+        return True
